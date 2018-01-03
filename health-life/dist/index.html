@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <!--<meta name="viewport" content="width=640,user-scalable=0">-->
+    <!--<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520"> -->
+    <meta name="viewport" content="width=720, initial-scale=1.0"> 
+    <script>
+    /*
+    (function(){
+        var viewport = document.querySelector( 'meta[name=viewport]' );
+        if( viewport ){
+            var content = viewport.getAttribute( 'content' );
+            var parts = content.split( ',' );
+            for( var i = 0; i < parts.length; ++i ){
+                var part = parts[ i ].trim();
+                var pair = part.split( '=' );
+                if( pair[ 0 ] === 'min-width' ){
+                    var minWidth = parseInt( pair[ 1 ] ) ;
+                    if( screen.width < minWidth ){
+                    document.head.removeChild( viewport );
+                    var newViewport = document.createElement( 'meta' );
+                    newViewport.setAttribute( 'name', 'viewport' );
+                    newViewport.setAttribute( 'content', 'width=' + minWidth + ', user-scalable=0, maximum-scale=1' );
+                    document.head.appendChild( newViewport );
+                    break;
+                    }
+                }
+            }
+        }
+    })();
+    */
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+	<!-- FB -->
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="合隆羽藏 Health Life" />
+        <meta property="og:image" content="img/bg-q4.jpg" />
+        <meta property="og:description" content="合隆羽藏 Health Life 溫度測試" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="合隆羽藏" />
+        <meta name="twitter:title" content="合隆羽藏 Health Life">
+        <meta name="twitter:image" content="img/bg-q4.jpg">
+        <meta name="twitter:description" content="合隆羽藏 Health Life 溫度測試">
+    <script>
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+
+	<script type="text/x-template" id="question-box">
+		<div class="question-container container container-fluid" :class="{ visible: stage == info.id }">
+			<div class="background"><img class="" :src="'./img/bg-' + info.id + '.jpg'" alt=""></div>
+        	<div class="question-content content">  
+				<div class="question-box">
+					<h2 class="question-title font-color-red">
+						<img class="icon" :src="'./img/icon-'+ info.id + '.png'" alt="">
+						<span class="word">{{info.title}}</span>
+					</h2>
+					<ul class="question-options">
+						<label v-for="(text, index) in info.options">
+							<input type="radio" :name="info.id" :value="index+1" v-model="answer">
+							<li class="question-options-item options-item btn">
+								<p class="text"><span class="font-xl">{{index+1}}. {{text}}</span></p>
+							</li>
+						</label>
+					</ul>
+					<!--<div class="btn-group" @click="toStage(info.next)">
+						<div class="btn btn-custom"><img src="./img/btn-next.png" alt=""></div>
+					</div>-->
+				</div>
+				<div class="mask" :class="{ visible: info.answer }"></div>
+    		</div>
+    	</div>
+	</script>
+
+	
+<header class="header fixed">
+    <div class="header-container">
+        <div class="header-content">
+            <div class="logo btn">
+                <a onclick="" href="./index.html">
+                    <img class="" src="./img/logo.png" alt="">
+                </a> 
+            </div>
+            <div class="title">
+                <h1 class="title-top font-color-red">選好被，睡好眠 </h1>
+                <h6 class="title-bottom">測試你的最佳溫度！給您最棒的產品！</h6>
+            </div>
+            <div class="hamburger btn">
+                <label for="main-nav-active">
+                    <div class="h-group btn">
+                        <div class="h-line"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+	<div id="app" class="wrap full-screen">
+
+    	<div class="container container-fluid" :class="{ visible: stage == 'index' }">
+			<div class="background"><img class="" src="./img/bg-index.jpg" alt=""></div>
+        	<div class="index-content content">  
+				<div class="index-box">
+					<h3 class="index-title font-color-red">你知道自己適合蓋什麼樣的被子嗎？</h3>
+					<p class="index-description">
+						人們的一生之中，有將近三分之一的時間是在睡眠中度過的，想要擁有舒適的睡眠，
+						被子的舒適程度會有很大的影響哦！挑選到最適合自己睡眠習慣的羽絨被，
+						將能幫助你提升睡眠品質，天天都能擁有好精神！
+						<br>
+						<br>
+						快來填寫睡眠環境問卷，讓我們用專業幫你挑一床好睡的羽絨被吧～
+					</p>
+					<div class="btn-group" @click="toStage('temp')">
+						<div class="btn btn-custom btn-step"><img src="./img/btn-go.png" alt=""></div>
+					</div>
+				</div>
+    		</div>
+    	</div>
+
+		<div class="question-container container container-fluid" :class="{ visible: stage == 'temp' }">
+			<div class="background"><img class="" :src="'./img/bg-q1.jpg'" alt=""></div>
+        	<div class="question-content temp-content content">  
+				<div class="question-box temp-box">
+					<h2 class="question-title font-color-grey">
+						<span class="word font-xs">定位後會預設溫度，請設定您正確的房間溫度</span>
+					</h2>
+					<div class="thermometer">
+						<div class="thermometer-info">
+							<h1 class="val" :style="'color:'+tempColor"><span class="font-xl">{{temp.val}}</span></h1>
+							<p class="unit"><span class="font-xl">°C</span></p>
+						</div>
+						<div class="btn btn-custom btn-turndown" @click="tempChange(-1)">
+							<img src="./img/btn-turndown.png" alt="">
+						</div>
+						<div class="scale">
+							<p class="area">{{temp.site}}</p>
+							<!-- <div class="bar btn" :style="'background:'+tempColor+';left:'+tempX"></div> -->
+						</div>
+						<div class="btn btn-custom btn-turnup" @click="tempChange(1)">
+							<img src="./img/btn-turnup.png" alt="">
+						</div>
+					</div>
+					<h4 class="temp-box-note">
+						<span class="icon icon-title"></span>
+						<span class="word">按左右兩側按鈕，可調整溫度高低</span>
+						<span class="icon icon-title"></span>
+					</h4>
+					<div class="btn-group" @click="toStage('q2')">
+						<div class="btn btn-custom btn-step"><img src="./img/btn-next.png" alt=""></div>
+					</div>
+				</div>
+    		</div>
+    	</div>
+
+		<question-box v-for="(info, index) in questions.list"
+			:key="index"
+			:stage="stage"
+			:info="info"
+			v-model="info.answer">
+		</question-box>
+
+		<div class="result-container container container-fluid" :class="{ visible: stage == 'result' }">
+			<div class="background"><img class="" src="./img/bg-result.jpg" alt=""></div>
+        	<div class="result-content content">  
+				<div class="question-box result-box">
+					<h2 class="question-title font-color-grey">
+						<span class="word font-xs">答案揭曉，最適合您的被款是：</span>
+						<span class="word font-xs font-color-red">{{answer.list[answer.val].title}}</span>
+					</h2>
+					<div class="product-group row row-no-padding">
+						<div v-for="(key, index) in answer.list[answer.val].products" 
+							class="product-item col col-4 no-padding">
+							<div class="product-pic">
+								<img :src="product[key].img" alt="">
+								<a :href="product[key].link" target="_blank">
+									<div class="btn btn-custom btn-link">
+										<p class="txt"><span class="font-s">推薦說明</span></p>
+									</div>
+								</a>
+							</div>
+							<h6 class="product-name">{{product[key].name}}</h6>							
+						</div>
+					</div>							
+				</div>
+    		</div>
+    	</div>
+
+ 	</div>
+	
+	<input type="checkbox" id="" class="cover-active">
+<div class="cover">
+    <div class="cover-container">
+        <div class="cover-content">
+            <h3 class="">請用電腦看</h3>
+        </div>
+    </div>
+</div>
+
+<div class="loading loading-page visible">
+    <div class="loading-container">
+        <div class="loading-content">
+            <div class="icon"></div>
+            <h3 class="loaded-percent weight-b">
+                <canvas class="loaded-canvas"></canvas>
+            </h3>
+            <!--<h3 class="loaded-bar"></h3>-->
+        </div>
+    </div>
+</div>
+
+
+<!--<script src="./require.js" defer async="true" data-main="./js/app"></script>-->
+    <script src="./js/libs.min.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+
+</script>
+
+</body>
+</html>
