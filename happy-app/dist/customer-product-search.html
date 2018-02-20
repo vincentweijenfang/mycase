@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>樂利Happy</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=750,
+                                   maximum-scale=1.0,
+                                   user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520">  -->
+    <script>
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="樂利Happy" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="樂利門市APP" />
+        <meta name="twitter:title" content="樂利Happy">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:description" content="">
+    <script>
+
+    /*
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', '');
+
+    */
+
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/libs.min.js"></script>
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+	
+	<script type="text/x-template" id="product-item">
+	<div class="product-item">
+	<div class="product-frame">
+		<div class="product-item-pic">
+			<div class="scale-fix-100" :ref="'slide-' + item.id">
+				<div v-for="(src, index) in item.pic">
+					<label :for="'product-' + item.id">
+						<img :src="src" alt="">
+					</label>
+				</div>
+			</div>
+		</div>
+		<input :id="'product-' + item.id" 
+			class="product-item-active" 
+			type="checkbox" v-model="state">
+		<div class="product-item-cover">
+			<label :for="'product-' + item.id">
+				<img class="icon-checked" src="./img/icon/icon-checked.png" alt="">
+			</label>
+			<div class="btn-group">
+				<button type="button" class="btn btn-air btn-edit">
+					<img class="icon" src="./img/icon/icon-edit.png" alt="">
+					<span class="text font-color-red">編輯此項</span>
+				</button>
+				<button type="button" class="btn btn-air btn-delete">
+					<img class="icon" src="./img/icon/icon-delete.png" alt="">
+					<span class="text font-color-red">刪除此項</span>
+				</button>
+			</div>
+		</div>
+		<div class="product-item-info">
+			<h5 class="product-item-name">{{item.name | ellipsis}}</h5>
+			<div class="product-item-costBox">
+				<p class="text">
+					<span class="word font-xl font-color-red font-weight-B">${{item.price.origin | convert}}</span>
+				</p>
+			</div>
+			<div class="product-item-foot">
+				<a class="btn btn-more font-color-red product-item-more"
+				v-if="item.more !== 'hidden' && item.more" 
+				:href="item.more">
+					•••
+				</a>
+				<div class="opinion">
+					<div class="opinion-score">
+						<span class="opinion-score-icon" :style="'width:' + star + 'px'"></span>
+						<span class="opinion-value">{{item.score}}</span>
+					</div>
+					<div class="opinion-like">
+						<span class="opinion-like-icon"></span>
+						<span class="opinion-value">{{item.like}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</script>
+
+<script>
+	
+Vue.component( 'product-item', {
+	template: '#product-item',
+	props: {
+		index: [ String, Number ],
+		item: Object,
+	},
+	data: function(){
+		return{
+			state: this.item.state,
+		}
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeState', function( val ){
+			that.state = val;
+		});
+	},
+	mounted: function(){
+		if( this.item.pic.length > 1 ){
+			$( this.$refs[ 'slide-' + this.item.id ] ).slick({
+				slidesToShow: 1,
+				// rtl: true,
+				swipe:     true,
+				dots:      true,
+				prevArrow: false,
+				nextArrow: false,
+			});
+		}
+	},
+	filters: {
+		convert: function( val ){
+			return val.toFixed( 0 ).toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' );
+		},
+		ellipsis: function( val ){
+			var len = 19;
+			return val.length > len ? val.substring( 0, len ) + '...' : val;
+		}
+	},
+	watch: {
+		'state': {
+			handler: function( val ){
+				var that = this;
+				bus.$emit( 'changeValue', {
+					index: that.index,
+					list: 'product',
+					key: 'state',
+					val: val, 
+				});		
+			}
+		}
+	},
+	computed: {
+		star: function(){
+			var val = this.item.score > 5 ? 5 : this.item.score;
+			return val * 18 + ( (Number(val.toFixed(0))-1) * 4 + 2 );  
+		}
+	}
+});
+
+</script>
+
+	<div id="app" class="wrap full-screen" :class="[user, {'B': classes}]">
+
+		<header class="header">
+			<div class="header-container">
+				<div class="header-content">
+					<a href="javascript:(0)">
+						<div class="icon icon-custom icon-back"></div>
+					</a>
+					<div class="header-box">
+                        
+                        <!-- headerMenu  -->
+						<ul class="headerMenu">
+                            <li class="btn headerMenu-item">
+                                <p class="headerMenu-name">
+                                    <img src="./img/icon/header-filter-customer.png" alt="">
+                                    <span class="word">篩選</span>
+                                </p>
+                            </li>
+                        </ul>
+						
+						<!-- search  -->
+						<div class="search">
+                            <form>
+                                <!-- default focus error -->
+                                <div class="form-item form-item-text form-item-search">
+                                    <div class="frame">
+                                    <input 
+                                        class="form-text" 
+                                        type="text" 
+                                        name="search"
+                                        value="樂利 Happy 7"/>
+                                    <button class="btn btn-search" type="submit">
+                                        <img class="is-focus" src="./img/icon/search-focus.png" alt="">
+                                        <img class="is-blur" src="./img/icon/search-blur.png" alt="">
+                                    </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    
+				</div>
+            </div>  
+            <!-- classes  -->
+			<div class="classes">
+                <ul class="classes-list">
+                    <li class="classes-item btn isActive">
+                        <p class="classes-name"><span class="font-xl">推薦商品</span></p>
+                    </li>
+                    <li class="classes-item btn">
+                        <p class="classes-name"><span class="font-xl">最新商品</span></p>
+                    </li>
+                    <li class="classes-item btn">
+                        <p class="classes-name"><span class="font-xl">價格排序</span><span class="font-ex">高<br>低</span></p>
+                    </li>
+                </ul>
+            </div>
+		</header>
+
+		
+<div class="menu">
+    <ul class="menu-list">
+        
+
+        <li class="menu-item btn btn-icon isActive">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-common-store.png" alt="">
+                    <img class="icon-pic icon-customer" src="./img/icon/menu-common-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">常用</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li>
+        <li class="menu-item btn btn-icon">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-paint-store.png" alt="">
+                    <img class="icon-pic icon-customer" src="./img/icon/menu-paint-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">塗料</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li>
+        <li class="menu-item btn btn-icon">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-tool-store.png" alt="">
+                    <img class="icon-pic icon-customer" src="./img/icon/menu-tool-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">工具</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li> 
+        <li class="menu-item btn btn-icon">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-cleaning-store.png" alt="">
+                    <img class="icon-pic icon-customer" src="./img/icon/menu-cleaning-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">清潔</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li> 
+        <li class="menu-item btn btn-icon">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-work-store.png" alt="">
+                    <img class="icon-pic icon-customer" src="./img/icon/menu-work-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">施工</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li> 
+        <li class="menu-item btn btn-icon">
+            <a class="menu-item-box" href="javascript:(0)">
+                <div class="menu-icon icon">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-other-store.png" alt="">
+                    <img class="icon-pic icon-store" src="./img/icon/menu-other-customer.png" alt="">
+                </div>
+                <p class="menu-name font-weight-B">
+                    <span class="font-l">其他</span>
+                    <span class="menu-item-quantity font-weight-B">15</span>
+                </p>
+            </a>
+        </li> 
+
+    </ul> 
+</div>
+
+
+
+
+
+    	<div class="container">
+        	<div class="product-content content">  
+                <div class="product-box">
+                    <div class="product-list">
+                        <product-item v-for="(item, index) in product.list"
+                            :key="index"
+                            :index="index"
+                            :item="item">
+                        </product-item>
+                    </div>
+                </div>  
+    		</div>
+    	</div>
+
+	
+<div class="cover-waiting cover" :class="{ 'visible': cover }">
+    <div class="cover-container">
+        <div class="cover-content">
+            <p class="cover-waiting-msg">資料處理中，請稍後</p>
+        </div>
+    </div>
+</div>
+
+ 	</div>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+var app = new Vue({
+	el: '#app',
+	data: {
+		page: 'product',
+		user: 'customer', // 使用者，分為店家 store 和消費者 customer，主色和內容不同
+		cover: false, // 遮住所有內容，防止連擊按鈕呢
+		classes: true, // header 中是否有分類的選單？
+		product: {
+            list: [
+                {
+                    id: 'S008390',
+                    group: '大神',
+                    name: '大大大大大大大大大大大大大大大大大大大大大大大大大',
+                    pic: [
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 5.5,
+                    like: 994,
+                    state: false,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: '?????????<br>?????????????<br>',
+               },
+               {
+                    id: 'S008000000390',
+                    group: '大神',
+                    name: 'Sener',
+                    pic: [
+                        './img/product/paint.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 4.5,
+                    like: 994,
+                    state: true,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: '?????????<br>?????????????<br>',
+               },
+               {
+                    id: 'S068767808390',
+                    group: '大神',
+                    name: 'Sener',
+                    pic: [
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 5.5,
+                    like: 994,
+                    state: false,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: '?????????<br>?????????????<br>',
+               },
+               {
+                    id: 'S9999008390',
+                    group: '大神',
+                    name: 'Sener',
+                    pic: [
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 5.5,
+                    like: 994,
+                    state: false,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: '?????????<br>?????????????<br>',
+               },
+               {
+                    id: 'S008KKKKK390',
+                    group: '大神',
+                    name: 'Sener',
+                    pic: [
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                        './img/product/paint.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 5.5,
+                    like: 994,
+                    state: false,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: '?????????<br>?????????????<br>',
+               },
+            ],
+        },
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeValue', function( opt ){
+			that[ opt.list ].list[ opt.index ][ opt.key ] = opt.val;
+		});
+	},
+	mounted: function(){
+		
+	},
+	filters: {
+
+	},
+	computed: {
+		
+	},
+	methods: {
+
+	},
+});
+
+</script>
+
+</body>
+</html>

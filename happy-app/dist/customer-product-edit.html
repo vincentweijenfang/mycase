@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>樂利Happy</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=750,
+                                   maximum-scale=1.0,
+                                   user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520">  -->
+    <script>
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="樂利Happy" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="樂利門市APP" />
+        <meta name="twitter:title" content="樂利Happy">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:description" content="">
+    <script>
+
+    /*
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', '');
+
+    */
+
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/libs.min.js"></script>
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+	
+	<div id="app" class="wrap full-screen" :class="[user, {'B': classes}]">
+
+        <header class="header B">
+            <div class="header-container">
+                <div class="header-content">
+                    <a href="javascript:(0)">
+                        <div class="icon icon-custom icon-back"></div>
+                    </a>
+                    <div class="header-box">
+
+                        <!-- headerMenu  -->
+						<ul class="headerMenu">
+                            <li class="btn headerMenu-item headerMenu-item-more">
+                                <a class="btn btn-more btn-more-vertical font-color-grey">
+                                    •••
+                                </a>
+                            </li>
+                        </ul>
+                        
+                        <div class="title">
+                            <h6 class="text">商品新增</h6>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+            </div>  
+        </header>
+
+    	<div class="container">
+        	<div class="product-content content">  
+                <div class="btn-foot-group">
+                    <!-- <button type="button" class="btn btn-foot btn-focus">
+                        <span class="icon icon-focus isFocus"><img src="./img/icon/btn-back-isFocus-customer.png" alt=""></span>
+                        <span class="icon icon-focus isBlur icon-store"><img src="./img/icon/btn-back-isBlur-store.png" alt=""></span> 
+                        <span class="icon icon-focus isBlur icon-customer"><img src="./img/icon/btn-back-isBlur-customer.png" alt=""></span>
+                        <span class="text">回上一頁</span>
+                    </button> -->
+                    <button type="button" class="btn btn-foot">
+                        <span class="text">確定新增</span>
+                    </button>
+                </div>
+
+                <div class="product-box">
+                    <div class="product-edit">
+                        <label for="product-upload-picture">
+                        <div class="product-item-pic product-upload">
+                            <div class="scale-fix-75">
+                                <input id="product-upload-picture"   
+                                    class="product-upload-picture" 
+                                    type="file" name="picture" 
+                                    accept="image/*" 
+                                    @change="upload">
+                                    <!-- multiple="multiple" -->
+                                <div class="scale-fix-box">
+                                    <img :src="edit.picture.url" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        </label>
+                        <div class="product-edit-form font-xl">
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">類別：</p>
+                                <div class="product-edit-select">
+                                    <select class="product-edit-item_selectbox" name="group" v-model="edit.group">
+                                        <option v-for="(item, index) in product.group" :value="item" >
+                                            {{item}}
+                                        </option>
+                                    </select>                                    
+                                    <!-- <input class="product-edit-item_textbox" 
+                                    type="text" name="group" 
+                                    v-model="edit.group" /> -->
+                                </div>
+                            </div>
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">名稱：</p>
+                                <div class="product-edit-input">
+                                    <input class="product-edit-item_textbox" 
+                                    type="text" name="name" 
+                                    v-model="edit.name" />
+                                </div>
+                            </div>
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">原價：</p>
+                                <div class="product-edit-input">
+                                    <input class="product-edit-item_textbox" 
+                                    type="text" name="price-origin" 
+                                    v-model="edit.price.origin" />
+                                </div>
+                            </div>
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">特惠價：</p>
+                                <div class="product-edit-input">
+                                    <input class="product-edit-item_textbox" 
+                                    type="text" name="price-spacial" 
+                                    v-model="edit.price.spacial" />
+                                </div>
+                            </div>
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">庫存：</p>
+                                <div class="product-edit-input">
+                                    <input class="product-edit-item_textbox" 
+                                    type="text" name="quantity" 
+                                    v-model="edit.quantity" />
+                                </div>
+                            </div>
+                            <div class="product-edit-item">
+                                <p class="product-edit-name">介紹：</p>
+                                <div class="product-edit-article">
+                                    <textarea class="product-edit-item_textbox product-edit-item_articlebox" 
+                                    :style="'height: ' + textareaHeight"
+                                    name="intro" 
+                                    :ref="'edit-intro'"
+                                    v-model="edit.intro" /></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+    		</div>
+    	</div>
+
+	
+<div class="cover-waiting cover" :class="{ 'visible': cover }">
+    <div class="cover-container">
+        <div class="cover-content">
+            <p class="cover-waiting-msg">資料處理中，請稍後</p>
+        </div>
+    </div>
+</div>
+
+ 	</div>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+var app = new Vue({
+	el: '#app',
+	data: {
+		page: 'product',
+		user: 'customer', // 使用者，分為店家 store 和消費者 customer，主色和內容不同
+		cover: false, // 遮住所有內容，防止連擊按鈕呢
+        classes: false, // header 中是否有分類的選單？
+        edit: {
+            picture: {
+                data: '',
+                url: '',
+            },
+            group: '漆漆',
+            name: '殺手',
+            price: {
+                origin: 888,
+                spacial: 887,
+            },
+            quantity: '100000003',
+            intro: 'ㄆㄩㄥ',
+        },
+		product: {
+            group: [ '漆漆ㄑ', '漆漆', 'ㄑ' ],
+            list: [
+                {
+                    id: 'S008390',
+                    group: '大神',
+                    name: '大大大大大大大大大大大大大大大大大大大大大大大大大',
+                    pic: [
+                        './img/product/paint-lg.png',
+                        './img/product/paint-lg.png',
+                        './img/product/paint-lg.png',
+                    ],
+                    more: 'https://www.facebook.com/sener',
+                    score: 5.5,
+                    like: 994,
+                    state: false,
+                    checked: false, // 不可被選呢
+                    price: {
+                        origin: 888,
+                        spacial: 887,
+                    },
+                    reserve: 8000,
+                    intro: 
+                    '<p class="text font-color-red font-xs">包裝方式：１立桶裝、１加侖桶裝、５加侖桶裝。</p><br><p class="text font-xs">用量標準：用量約為0.4 kg/m2，１立裝約0.7坪，１加侖約３坪，５加侖約15坪，此為一次塗佈量（須視施工面而定）。<br>包晴天強效壁癌漆，是一支水性、無溶劑、單液型，隨開即用， 施工簡便的DIY防水材。富含許多有機和無機的特殊化學成分， 滲透結晶劑及奈米矽晶粉和高分子壓克力樹脂組合而成，針對施工面之水泥漆脫落、白華、長毛、壁癌所設計使用，能與混泥土或水泥基材起催化作用，有效的抑制壁癌。</p>',
+               },
+            ],
+        },
+    },
+	created: function(){
+		var that = this;
+		bus.$on( 'changeValue', function( opt ){
+			that[ opt.list ].list[ opt.index ][ opt.key ] = opt.val;
+		});
+	},
+	mounted: function(){
+		
+	},
+	filters: {
+
+	},
+	computed: {
+		textareaHeight: function( val ){
+            var _el = this.$refs[ 'edit-intro' ];
+            return max( 3, this.edit.intro.substr(0).split('\n').length ) * 1.75 + 'em';
+            // console.log( _el.style.height );
+            // console.log( _el.value.substr(0, _el.selectionStart).split('\n').length );
+            // console.log( this.edit.intro.substr(0).split('\n').length );
+            // console.log( this.edit.intro.line.length );
+            // this.lines().length
+        }
+	},
+	methods: {
+        upload: function( data ){
+            var that = this;
+            var files = data.target.files || data.dataTransfer.files;
+            this.edit.picture.data = data;
+            if( files.length ){
+                console.log( files );
+                var image = new Image(),
+                    reader = new FileReader();
+                reader.onload = function( e ){
+                    console.log( e );
+                    that.edit.picture.url = e.target.result;
+                };
+                console.log( files[0] );
+                reader.readAsDataURL( files[0] );
+            }
+        }
+	},
+});
+
+</script>
+
+</body>
+</html>

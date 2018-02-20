@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>樂利Happy</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=750,
+                                   maximum-scale=1.0,
+                                   user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520">  -->
+    <script>
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="樂利Happy" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="樂利門市APP" />
+        <meta name="twitter:title" content="樂利Happy">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:description" content="">
+    <script>
+
+    /*
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', '');
+
+    */
+
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/libs.min.js"></script>
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+	
+	<script type="text/x-template" id="cart-item">
+	<div class="cart-item">
+		<label class="cart-item-label" for="#">
+			<input class="check" type="checkbox" v-model="state" />
+			<div class="check-box hidden"></div>
+			<div class="cart-item-pic">
+				<img :src="item.pic" alt="">
+			</div>
+		</label>
+		<div class="cart-item-info">
+			<h4 class="cart-item-name">{{item.name}}</h4>
+			<div class="cart-item-quantity">
+				<p class="text">
+					<span class="font-color-lightgrey">單位：</span>
+					<span class="font-color-black">{{item.unit}}</span>
+				</p>
+				<p class="text">
+					<span class="font-color-lightgrey">數量：</span>
+					<span class="font-color-black underline">{{item.quantity}}</span>
+				</p>
+			</div>
+			<div class="cart-item-total">
+				<p class="text">
+					<span class="font-color-lightgrey">總訂購量：</span>
+					<span class="font-color-black">{{item.total}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script>
+
+Vue.component( 'cart-item', {
+	template: '#cart-item',
+	props: {
+		index: [ String, Number ],
+		item: { type: Object, },
+	},
+	data: function(){
+		return {
+			quantity: this.item.quantity,
+			state: this.item.state,
+		}
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeState', function( val ){
+			that.state = val;
+		});
+	},
+	watch: {
+		'quantity': {
+			handler: function( val ){
+				var that = this;
+				if( val < 0 ){
+					this.quantity = 0;
+				}	
+				else{
+					bus.$emit( 'changeValue', {
+						index: that.index,
+						list: 'cart',
+						key: 'quantity',
+						val: Number(val), 
+					});
+				}
+
+			}
+		},
+		'state': {
+			handler: function( val ){
+				var that = this;
+				bus.$emit( 'changeValue', {
+					index: that.index,
+					list: 'cart',
+					key: 'state',
+					val: val, 
+				});		
+			}
+		}
+	},
+	methods: {
+		changeQuantity: function( val ){
+			this.quantity = Number(this.quantity) + val;
+		}
+	}
+});
+
+</script>
+
+	<div id="app" class="wrap full-screen" :class="[user, {'B': classes}]">
+
+		<header class="header">
+			<div class="header-container">
+				<div class="header-content">
+					<a href="javascript:(0)">
+						<div class="icon icon-custom icon-back"></div>
+					</a>
+					<div class="header-box">
+						<!-- title/breadcrumb  -->
+						<div class="title">
+							<h6 class="text">門店 - 大盤 - 訂單確認</h6>
+						</div>
+					</div>
+				</div>
+			</div>  
+		</header>
+
+    	<div class="container">
+        	<div class="content">  
+
+                <div class="btn-foot-group">
+                    <button type="button" class="btn btn-foot btn-full">
+                        <span class="text">訂單送出</span>
+                    </button>
+                </div>
+
+                <div class="result">
+                    <div class="result-box">
+                        <label class="select-all-label unvisibility" for="#">
+                            <input class="check" type="checkbox" v-model="cart.selectAll" />
+                            <div class="check-box"></div>
+                            <p class="text"><span class="font-xl">選擇全部</span></p>
+                        </label>
+                        <div class="result-info">
+                            <p class="text"><span class="font-xl">總計訂購數量</span></p>
+                            <p class="text result-quantity">
+                                <span class="font-xl">{{quantityAll}} </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="cart-list">
+
+                    <h3 class="cart-list-title">大盤訂單確認</h3>
+                    
+					<form action="">
+						<cart-item v-for="(item, index) in cart.list"
+							:key="index"
+							:index="index"
+                            :item="item">
+						</cart-item>
+                    </form>
+					
+				</div>
+
+    		</div>
+    	</div>
+
+	
+<div class="cover-waiting cover" :class="{ 'visible': cover }">
+    <div class="cover-container">
+        <div class="cover-content">
+            <p class="cover-waiting-msg">資料處理中，請稍後</p>
+        </div>
+    </div>
+</div>
+
+ 	</div>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+var app = new Vue({
+	el: '#app',
+	data: {
+		page: 'order',
+		user: 'store wholesaler', // 使用者，分為店家 store 和消費者 customer，主色和內容不同
+		cover: false, // 遮住所有內容，防止連擊按鈕呢
+		classes: false, // header 中是否有分類的選單？
+		cart: {
+            selectAll: false,
+            list: [
+                {
+                    id: 'Sener0384901', 
+                    name: 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', 
+                    pic: './img/product/paint.png', 
+                    unit: '桶', 
+                    price: 1394, 
+                    total: 10,
+                    quantity: 15, 
+                    state: false, 
+                    more: 'hidden', 
+                },
+                {
+                    id: 'Sener0384901', 
+                    name: 'SENER大大', 
+                    pic: './img/product/paint.png', 
+                    unit: '箱', 
+                    price: 10394, 
+                    total: 100,
+                    quantity: 5, 
+                    state: true, 
+                    more: 'hidden', 
+                },
+                {
+                    id: 'Sener0384901', 
+                    name: 'SENER大大', 
+                    pic: './img/product/paint.png', 
+                    unit: '桶', 
+                    price: 10394, 
+                    total: 100,
+                    quantity: 5, 
+                    state: false, 
+                    more: 'hidden', 
+                },
+                {
+                    id: 'Sener0384901', 
+                    name: 'SENER大大', 
+                    pic: './img/product/paint.png', 
+                    unit: '箱', 
+                    price: 10394, 
+                    total: 100,
+                    quantity: 5, 
+                    state: false, 
+                    more: 'hidden', 
+                },
+                {
+                    id: 'Sener0384901', 
+                    name: 'SENER大大', 
+                    pic: './img/product/paint.png', 
+                    unit: '箱', 
+                    price: 10394, 
+                    total: 100,
+                    quantity: 5, 
+                    state: false, 
+                    more: 'hidden', 
+                },
+                {
+                    id: 'Sener0384901', 
+                    name: 'SENER大大', 
+                    pic: './img/product/paint.png', 
+                    unit: '箱', 
+                    price: 10394, 
+                    total: 100,
+                    quantity: 5, 
+                    state: true, 
+                    more: 'hidden', 
+                },
+            ],
+        },
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeValue', function( opt ){
+			that[ opt.list ].list[ opt.index ][ opt.key ] = opt.val;
+		});
+	},
+	mounted: function(){
+		
+    },
+    watch: {
+        'cart.selectAll': function( val ){
+            console.log( val );
+            bus.$emit( 'changeState', val );
+        }
+    },
+	filters: {
+
+	},
+	computed: {
+		quantityAll: function(){
+            var list = this.cart.list,
+                quantitys = [],
+                units = [],
+                text = '';
+            for( var i in list ){
+                if( list[ i ].state ){
+                    var index = units.indexOf( list[ i ].unit );
+                    if( index == -1 ){
+                        quantitys.push( list[ i ].quantity );
+                        units.push( list[ i ].unit );
+                    }
+                    else{
+                        quantitys[ index ] += list[ i ].quantity;
+                    }
+                }
+            }
+            for( var i = 0; i < quantitys.length; i++ ){
+                text += quantitys[ i ] + units[ i ] + ' / ';
+            }
+            return text.substring( 0, text.length-3 );
+        },
+	},
+	methods: {
+
+	},
+});
+
+</script>
+
+</body>
+</html>

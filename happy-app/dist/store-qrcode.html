@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>樂利Happy</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=750,
+                                   maximum-scale=1.0,
+                                   user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520">  -->
+    <script>
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="樂利Happy" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="樂利門市APP" />
+        <meta name="twitter:title" content="樂利Happy">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:description" content="">
+    <script>
+
+    /*
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', '');
+
+    */
+
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/libs.min.js"></script>
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+    
+    <script type="text/x-template" id="qrcode">
+	<div class="qrcode">
+		<img class="qrcode-pic" :src="'http://chart.apis.google.com/chart?cht=qr&chl=' + link + '&chs=200x200&chld=L'" alt="">
+	</div>
+</script>
+
+<script>
+	
+Vue.component( 'qrcode', {
+	template: '#qrcode',
+	props: {
+		link: [ String, Number ],
+	},
+});
+
+</script>
+
+	<div id="app" class="wrap full-screen" :class="[user, {'B': classes}]">
+
+		<header class="header C">
+			<div class="header-container">
+				<div class="header-content">
+                    <a href="javascript:(0)">
+                        <div class="icon icon-custom icon-back"></div>
+                    </a>
+					<div class="header-box">
+
+                        <!-- headerMenu  -->
+						<ul class="headerMenu">
+                            <li class="btn headerMenu-item headerMenu-item-more">
+                                <a class="btn btn-more btn-more-vertical font-color-white">
+                                    •••
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="title">
+                            <h3 class="text font-color-white">門店 QR code</h3>
+                        </div>
+
+					</div>
+				</div>
+			</div>  
+		</header>
+
+    	<div class="container">
+        	<div class="content">  
+
+                <div class="qrcode-box">
+                    <qrcode :link="order.list[0].link"></qrcode>
+                    <div class="qrcode-foot">
+                        <img class="icon" src="./img/icon/icon-camera.png" alt="">
+                        <p class="text font-color-white font-lg">請將鏡頭對準 QR code</p>
+                    </div> 
+                </div>
+
+    		</div>
+    	</div>
+
+	
+<div class="cover-waiting cover" :class="{ 'visible': cover }">
+    <div class="cover-container">
+        <div class="cover-content">
+            <p class="cover-waiting-msg">資料處理中，請稍後</p>
+        </div>
+    </div>
+</div>
+
+ 	</div>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+var app = new Vue({
+	el: '#app',
+	data: {
+		page: 'order',
+		user: 'store', // 使用者，分為店家 store 和消費者 customer，主色和內容不同
+		cover: false, // 遮住所有內容，防止連擊按鈕呢
+		classes: false, // header 中是否有分類的選單？
+		order: {
+            list: [
+                {
+                    id: '008390289028509',
+                    status: '未付款',
+                    time: '2022/13/20  12:00:61',
+                    link: 'https://www.facebook.com/sener',
+                    msg: '交易完成<br>感謝您使用本平台',
+                    visible: {
+                        cost: true,
+                        quantityAll: true,
+                    },
+                    cart: {
+                        list: [
+                            {
+                                id: 'Sener0384901', 
+                                name: 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 1394, 
+                                total: 10,
+                                quantity: 15, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                        ],
+                    }
+                },
+            ],
+        },
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeValue', function( opt ){
+			that[ opt.list ].list[ opt.index ][ opt.key ] = opt.val;
+		});
+	},
+	mounted: function(){
+		
+	},
+	filters: {
+
+	},
+	computed: {
+		
+	},
+	methods: {
+
+	},
+});
+
+</script>
+
+</body>
+</html>

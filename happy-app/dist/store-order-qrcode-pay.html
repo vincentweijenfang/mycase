@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="zh-tw" class="no-js ie6 oldie page__index"> <![endif]-->
+<!--[if IE 7]>    <html lang="zh-tw" class="no-js ie7 oldie page__index"> <![endif]-->
+<!--[if IE 8]>    <html lang="zh-tw" class="no-js ie8 oldie page__index"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="zh-tw" class="no-js page___index">
+<!--<![endif]-->
+<head>
+
+	    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>樂利Happy</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=750,
+                                   maximum-scale=1.0,
+                                   user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, min-width=520">  -->
+    <script>
+    </script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon.jpg" />
+        <meta property="og:locale" content="en_TW">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="樂利Happy" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:site_name" content="樂利門市APP" />
+        <meta name="twitter:title" content="樂利Happy">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:description" content="">
+    <script>
+
+    /*
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', '');
+
+    */
+
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/libs.min.js"></script>
+	
+<style>
+
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+    
+    <script type="text/x-template" id="qrcode">
+	<div class="qrcode">
+		<img class="qrcode-pic" :src="'http://chart.apis.google.com/chart?cht=qr&chl=' + link + '&chs=200x200&chld=L'" alt="">
+	</div>
+</script>
+
+<script>
+	
+Vue.component( 'qrcode', {
+	template: '#qrcode',
+	props: {
+		link: [ String, Number ],
+	},
+});
+
+</script>
+	<script type="text/x-template" id="order-qrcode">
+	<div class="order-item">
+		<div class="order-item-qrcode">
+			<qrcode :link="item.link"></qrcode>
+			<p class="text">
+				<span class="font-xl" v-html="item.msg"></span>
+			</p>
+		</div>
+		<h3 class="order-item-title">
+			<span class="word">訂單編號：</span>
+			<span class="word font-weight-B">{{item.id}}</span>
+		</h3>
+		<div class="order-item-info">
+			<div class="order-item-detail">
+				<p v-if="item.visible.quantityAll" class="text">
+					<span class="word font-lg">總計訂購數量：</span>
+					<span class="word font-lg font-color-red font-weight-B">{{quantityAll}}</span>
+				</p>
+				<p class="text">
+					<span class="word font-lg">訂單狀況：</span>
+					<span class="word font-lg" :class="statusClass">{{item.status}}</span>
+					<span v-if="item.status == '已付款'" class="icon icon-custom icon-ok"></span>
+					<span v-if="item.status == '未付款'" class="icon icon-custom icon-opps"></span>
+				</p>
+				<p v-if="item.visible.cost" class="text order-cost">
+					<span class="word font-lg">總計金額：</span>
+					<span class="word font-lg font-color-red font-weight-B">${{cost | filter}}</span>
+				</p>
+				<p class="text">
+					<span class="word font-lg">訂購內容：</span>
+				</p>
+				<ul class="ul-list order-detail-list">
+					<li v-for="(info, index) in item.cart.list" class="order-detail-item">
+						<p class="text font-weight-R">
+							<span class="word font-lg">{{info.name}}</span> - <span class="word font-lg">{{info.id}}</span><br>
+						</p>
+						<p class="text font-weight-R">
+							<span class="word font-lg">總訂購：</span>
+							<span class="word font-lg font-color-blue">{{info.quantity}}</span>
+							<span class="word font-lg"> / 單位：</span>
+							<span class="word font-lg font-color-blue">{{info.unit}}</span></span>
+						</p>
+					</li>
+				</ul>
+				<!-- <p class="text">
+					<span class="word font-lg">交易時間：</span>
+					<span class="word font-lg">{{item.time}}</span>
+				</p> -->
+			</div>
+		</div>
+	</div>
+</script>
+
+<script>
+	
+Vue.component( 'order-qrcode', {
+	template: '#order-qrcode',
+	props: {
+		index: [ String, Number ],
+		item: { type: Object, },
+	},
+	data: function(){},
+	filters: {
+		convert: function( val ){
+			return val.toFixed( 0 ).toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' );
+		}
+	},
+	computed: {
+		statusClass: function(){
+			switch( this.item.status ){
+				case '未付款': 
+					return 'font-color-red font-weight-B isUnpaid'; 
+				break;
+				case '已付款':
+					return 'font-color-blue font-weight-B isPaid'; 
+				break; 
+				default:
+					return 'font-color-blue'; 
+				break;
+			}
+		},
+		quantityAll: function(){
+            var list = this.item.cart.list,
+                quantitys = [],
+                units = [],
+                text = '';
+            for( var i in list ){
+                if( list[ i ].state ){
+                    var index = units.indexOf( list[ i ].unit );
+                    if( index == -1 ){
+                        quantitys.push( list[ i ].quantity );
+                        units.push( list[ i ].unit );
+                    }
+                    else{
+                        quantitys[ index ] += list[ i ].quantity;
+                    }
+                }
+            }
+            for( var i = 0; i < quantitys.length; i++ ){
+                text += quantitys[ i ] + units[ i ] + ' / ';
+			}
+			text = text.substring( 0, text.length-3 );
+            return String( text );
+        },
+		cost: function(){
+            var list = this.item.cart.list,
+				cost = 0;
+            for( var i in list ){
+				if( list[ i ].state ){
+					cost += list[ i ].price * list[ i ].quantity;
+                }
+			}
+			return cost;
+		},
+	},
+	watch: {
+		value: {
+			handler: function( val ){
+				
+			},
+		},
+		answer: {
+			handler: function( val ){
+				
+			}
+		}
+	},
+	methods: {
+		
+	}
+});
+
+</script>
+
+	<div id="app" class="wrap full-screen" :class="[user, {'B': classes}]">
+
+		<header class="header">
+			<div class="header-container">
+				<div class="header-content">
+					<a href="javascript:(0)">
+						<div class="icon icon-custom icon-back"></div>
+					</a>
+					<div class="header-box">
+
+						<!-- title/breadcrumb  -->
+						<div class="title">
+							<h6 class="text">門店 - 繳費 QR code</h6>
+						</div>
+
+					</div>
+				</div>
+			</div>  
+		</header>
+
+    	<div class="container">
+        	<div class="content">  
+
+				<div class="btn-foot-group">
+					<button type="button" class="btn btn-foot btn-focus">
+						<span class="icon icon-focus isFocus"><img src="./img/icon/btn-order-isFocus.png" alt=""></span>
+						<span class="icon icon-focus isBlur icon-store"><img src="./img/icon/btn-order-isBlur-store.png" alt=""></span> 
+						<span class="icon icon-focus isBlur icon-customer"><img src="./img/icon/btn-order-isBlur-customer.png" alt=""></span> 
+						<span class="text">訂單明細查詢</span> 
+					</button>
+					<button type="button" class="btn btn-foot">
+						<span class="text">繼續訂貨</span>
+					</button>
+                </div>
+
+				<div class="order-list">
+
+                    <order-qrcode v-for="(item, index) in order.list"
+                        :key="index"
+                        :index="index"
+                        :item="item">
+                    </order-qrcode>
+
+				</div> 
+
+    		</div>
+    	</div>
+
+	
+<div class="cover-waiting cover" :class="{ 'visible': cover }">
+    <div class="cover-container">
+        <div class="cover-content">
+            <p class="cover-waiting-msg">資料處理中，請稍後</p>
+        </div>
+    </div>
+</div>
+
+ 	</div>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/app.js"></script>
+
+<script>
+	
+var app = new Vue({
+	el: '#app',
+	data: {
+		page: 'order',
+		user: 'store', // 使用者，分為店家 store 和消費者 customer，主色和內容不同
+		cover: false, // 遮住所有內容，防止連擊按鈕呢
+		classes: false, // header 中是否有分類的選單？
+		order: {
+            list: [
+                {
+                    id: '008390289028509',
+                    status: '未付款',
+                    time: '2022/13/20  12:00:61',
+                    link: 'https://www.facebook.com/sener',
+                    msg: '交易完成<br>感謝您使用本平台',
+                    visible: {
+                        cost: true,
+                        quantityAll: true,
+                    },
+                    cart: {
+                        list: [
+                            {
+                                id: 'Sener0384901', 
+                                name: 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 1394, 
+                                total: 10,
+                                quantity: 15, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                            {
+                                id: 'Sener0384901', 
+                                name: 'SENER大大', 
+                                pic: './img/product/paint.png', 
+                                unit: '箱', 
+                                price: 10394, 
+                                total: 100,
+                                quantity: 5, 
+                                state: true, 
+                                more: 'hidden', 
+                            },
+                        ],
+                    }
+                },
+            ],
+        },
+	},
+	created: function(){
+		var that = this;
+		bus.$on( 'changeValue', function( opt ){
+			that[ opt.list ].list[ opt.index ][ opt.key ] = opt.val;
+		});
+	},
+	mounted: function(){
+		
+	},
+	filters: {
+
+	},
+	computed: {
+		
+	},
+	methods: {
+
+	},
+});
+
+</script>
+
+</body>
+</html>
