@@ -272,7 +272,11 @@ console.log( `%cVINCENT`,
 function showLoadingPercent( _canvas, _ctx, txt ){
     _ctx.clearRect( 0, 0, _canvas.width, _canvas.height );
     _ctx.font = '1.25em' + ' Arial';
+<<<<<<< HEAD
     _ctx.fillStyle = 'rgba( 255, 255, 255, 1 )';
+=======
+    _ctx.fillStyle = 'rgba( 89, 199, 189, 1 )';
+>>>>>>> d48c23bd58b12ffd338c6bb8fb195f4a9f40f1d8
     _ctx.textAlign = 'center'; 
 	_ctx.textBaseline = 'middle';
     _ctx.fillText( round(txt*100), _canvas.width/2, _canvas.height/2 );
