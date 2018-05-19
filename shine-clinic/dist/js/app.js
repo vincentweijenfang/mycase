@@ -2,7 +2,7 @@
  
  * @ client:  客戶
  * @ project: 專案
- * @ date:    Tue May 15 2018
+ * @ date:    Sat May 19 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -340,7 +340,12 @@ $( '.slide' ).each(function(){
 			slidesToShow: 1,
 		}
 	switch( $this.attr( 'slide-style' ) ){
-		case 'block': 
+		case 'picture':
+			options.prevArrow = '';
+			options.nextArrow = '';
+			options.dots = false;
+			options.arrow = false;
+			options.asNavFor = `.slideNav[slide-name="${$this.attr( 'slide-name' )}"] .slide--list`;
 		break;
 		case 'banner': 
 			options.slidesToShow = 4;	
@@ -363,6 +368,20 @@ $( '.slide' ).each(function(){
 		break;
 	}
 	$this.children( '.slide--list' ).slick( options );
+	// 圖片選單
+	if( options.asNavFor ){
+		let $nav = $( options.asNavFor ),
+			length = $this.find( '.slide--item' ).length;
+		$nav.slick({
+			prevArrow: $nav.siblings( '.slide--prev' ),
+			nextArrow: $nav.siblings( '.slide--next' ),
+			slidesToShow: length > 4 ? 4 : length,
+			slidesToScroll: length > 4 ? 4 : length,
+			asNavFor: `.slide[slide-name="${$this.attr( 'slide-name' )}"] .slide--list`,
+			centerMode: true,
+			focusOnSelect: true,
+		});
+	}
 });
 
 $body.on( 'click', '.cover-X', function(){
