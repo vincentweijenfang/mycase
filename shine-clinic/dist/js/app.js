@@ -70,25 +70,6 @@ var W  = window.innerWidth,
     loop = true,
     scroll = _body.scrollTop;
 
-window.requestAnimateFrame = (function(){
- return window.requestAnimationFrame       ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame    ||
-        window.oRequestAnimationFrame      ||
-        function( callback ){
-            return window.setTimeout( callback, 1000 / 60 ); // shoot for 60 fps
-        };
-})();
-window.cancelAnimateFrame = (function(){
- return window.cancelAnimationFrame       ||
-        window.webkitCancelAnimationFrame ||
-        window.mozCancelAnimationFrame    ||
-        window.oCancelAnimationFrame      ||
-        function( id ){
-            window.clearTimeout( id );
-        };
-})();
-
 /* 判斷瀏覽器大大與是否行動裝置 */
 function parseUserAgent(){
     var u1 = navigator.userAgent;
@@ -256,12 +237,6 @@ function saveToStorage( id, data ){
     window.localStorage[ id ] = JSON.stringify( data );
 }
 
-console.log( `%cVINCENT`, 
-`vartical-align: bottom; color: rgba(5,137,62,1);` +
-`font-family: Arial,"Noto Sans TC","Microsoft JhengHei";` +
-`font-size: 2rem; line-height: 1em;` +
-`border: 2px dashed rgba(5,137,62,1); ` +
-`margin: 15px 0px;padding: 0px 5px;` );
  var _loadingCanvas = $( '.loading-percent' )[ 0 ],
 	_loadingCtx = _loadingCanvas.getContext( '2d' ),
 	_loadingBar = document.querySelector( '.loading-bar' );
