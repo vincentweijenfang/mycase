@@ -1,5 +1,4 @@
-<!DOCTY
-PE html>
+<!DOCTYPE html>
 <html id="page-index" lang="zh-tw" class="no-js">
 <head>
 	    <meta charset="utf-8">
@@ -29,6 +28,15 @@ PE html>
         <meta name="twitter:description" content="">
         
     <link rel="stylesheet" href="./css/main.css">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.0&appId=889670897854680&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 </head>
 <body>
 
@@ -206,7 +214,7 @@ PE html>
         </div>
 
         <div class="container">
-            <form class="form" autocomplete="off">
+            <form refs="form" @submit.prevent="submitData()" action="#" id="form" class="form" autocomplete="off">
     <h3 class="form--title">
         <span class="icon"><img src="./svg/email.svg" alt=""></span>
         <span class="words">諮詢表單</span>
@@ -218,8 +226,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <input name="name" type="text" placeholder="請輸入真實姓名" />  
+                    <p class="errMsg" :class="{ 'active' : name.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <input @change="vali('name')" v-model="name.value" name="name" type="text" placeholder="請輸入真實姓名" />  
                 </div>
             </div>
         </div>
@@ -229,8 +237,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <input name="phone" type="text" placeholder="請輸入行動電話號碼" maxlength="10" />       
+                    <p class="errMsg" :class="{ 'active' : phone.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <input @change="vali('phone')" v-model="phone.value" name="phone" type="text" placeholder="請輸入行動電話號碼" maxlength="10" />       
                 </div>
             </div>
         </div>
@@ -240,8 +248,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <input name="lineid" type="text" placeholder="輸入LINE ID，可傳送照片諮詢" />       
+                    <p class="errMsg" :class="{ 'active' : lineid.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <input @change="vali('lineid')" v-model="lineid.value" name="lineid" type="text" placeholder="輸入LINE ID，可傳送照片諮詢" />       
                 </div>
             </div>
         </div>
@@ -251,8 +259,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <input name="email" type="text" placeholder="請輸入常用的墊子信箱，確保收到回覆信件" />       
+                    <p class="errMsg" :class="{ 'active' : email.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <input @change="vali('email')" v-model="email.value" name="email" type="text" placeholder="請輸入常用的墊子信箱，確保收到回覆信件" />       
                 </div>
             </div>
         </div>
@@ -262,10 +270,10 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input form--item--select">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <select name="time" id="">
+                    <p class="errMsg" :class="{ 'active' : time.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <select @change="vali('time')" v-model="time.value" name="time" id="">
                         <option selected disabled hidden value="提供專人為您解答並安排看診時間">提供專人為您解答並安排看診時間</option>
-                        <option value="凌晨5點59分">晚上11點40分</option>
+                        <option value="晚上11點40分">晚上11點40分</option>
                         <option value="凌晨5點59分">凌晨5點59分</option>
                     </select>
                 </div>
@@ -277,8 +285,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <textarea name="msg" placeholder="請簡單輸入想諮詢的療程或困擾。如：割雙眼皮，隆鼻手術，局部減脂...等"></textarea>
+                    <p class="errMsg" :class="{ 'active' : msg.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <textarea @change="vali('msg')" v-model="msg.value" name="msg" placeholder="請簡單輸入想諮詢的療程或困擾。如：割雙眼皮，隆鼻手術，局部減脂...等"></textarea>
                 </div>
             </div>
         </div>
@@ -288,8 +296,8 @@ PE html>
             </div>
             <div class="form--item--frame form--item--frame-full">
                 <div class="form--item--input">
-                    <p class="errMsg"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
-                    <input name="captcha" type="text" placeholder="請輸入圖片中的文字" />  
+                    <p class="errMsg" :class="{ 'active' : captcha.error }"><span class="errMsg--icon icon">!</span>未填寫正確或完整</p>
+                    <input @change="vali('captcha')" v-model="captcha.value" name="captcha" type="text" placeholder="請輸入圖片中的文字" />  
                 </div>
             </div>
         </div>
@@ -360,8 +368,8 @@ PE html>
         </div>
     </div>
     <div class="slide--dots"></div>
-    <div class="slide--prev icon icon-custom icon-prev"></div>
-    <div class="slide--next icon icon-custom icon-next"></div>
+    <div class="slide--prev icon icon-custom icon-prev"><img class="svg" src="./svg/Left-arrow.svg" alt=""></div>
+    <div class="slide--next icon icon-custom icon-next"><img class="svg" src="./svg/Right-arrow.svg" alt=""></div>
 </div>
         </div>
 
@@ -523,6 +531,69 @@ PE html>
 </script>
 <script src="./js/libs.min.js"></script>
 <script src="./js/app.js"></script>
+<script>
+var form = new Vue({
+    el: '#form',
+    data: {
+        name: {
+            value: '',
+            regex: /^[\u4e00-\u9fa5a-zA-Z-]+$/,
+            error: false,
+        },
+        phone: {
+            value: '',
+            regex: /^0[0-9]{9}$/,
+            error: false,
+        },
+        lineid: {
+            value: '',
+            regex: /[a-zA-Z0-9]/,
+            error: false,
+        },
+        email: {
+            value: '',
+            regex: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/,
+            error: false,
+        },
+        time: {
+            value: '提供專人為您解答並安排看診時間',
+            regex: /晚上11點40分|凌晨5點59分/,
+            error: false,
+        },
+        msg: {
+            value: '',
+            regex: /^[\u4e00-\u9fa5a-zA-Z-]+$/,
+            error: false,
+        },
+        captcha: {
+            value: '',
+            regex: /^[\u4e00-\u9fa5a-zA-Z-]+$/,
+            error: false,
+        }
+    },
+	methods: {
+        vali: function( item ){
+            if( this[ item ].value.match( this[ item ].regex ) ){
+                this[ item ].error = false;
+            }
+            else{
+                this[ item ].error = true;
+                return 'error';
+            }
+        },
+        submitData: function(){
+            let error = false;
+            for( let item in this.$data ){
+                if( this.vali( item ) == 'error' ) error = true;
+            }
+            if( !error ){
+                this.$el.submit();
+            }
+        },
+    }    
+})	
+</script>
+        
 
 </body>
 </html>

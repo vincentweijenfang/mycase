@@ -28,6 +28,15 @@
         <meta name="twitter:description" content="">
         
     <link rel="stylesheet" href="./css/main.css">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.0&appId=889670897854680&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 </head>
 <body>
 
@@ -383,8 +392,8 @@
         </div>
     </div>
     <div class="slide--dots"></div>
-    <div class="slide--prev icon icon-custom icon-prev"></div>
-    <div class="slide--next icon icon-custom icon-next"></div>
+    <div class="slide--prev icon icon-custom icon-prev"><img class="svg" src="./svg/Left-arrow.svg" alt=""></div>
+    <div class="slide--next icon icon-custom icon-next"><img class="svg" src="./svg/Right-arrow.svg" alt=""></div>
 </div>
         </div>
 
