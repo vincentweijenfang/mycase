@@ -1,0 +1,351 @@
+/************************************************
+ 
+ * @ client:  FET
+ * @ project: 4.5G Landing Page
+ * @ date:    Mon Jun 11 2018
+ * @ author:  Vincent Fang
+ * @ version: v1.0.0
+ 
+ ************************************************/
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +media
+        + max-width : 1280px
+        + max-width : 1020px
+-----------------------------------------------------------------------------*/
+/* media 
+*----------------------------------------------------------------------------*/
+/**
+*
+* Desktops
+*
+**/
+@media only screen and (max-width: 1280px) {
+  header .navbar .logo {
+    width: 112px;
+    height: 36px;
+  }
+  header .navbar .logo img {
+    max-width: 112px;
+  }
+  header .navbar .toolsComplex {
+    right: 10px;
+  }
+  footer .main {
+    padding: 0 20px;
+  }
+  footer .partnersLogoList,
+  footer .footerRight {
+    text-align: center;
+    display: block;
+    vertical-align: middle;
+  }
+  footer .partnersLogoList {
+    padding: 0 0 15px 0;
+  }
+  footer .footerRight .linkComplex,
+  footer .footerRight .copyright {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 1140px) {
+  /*header .navbar .main .redBg { left: 120px;}
+    header .navbar .otherLink { left: 200px;}*/
+  header .navbar .otherLink {
+    left: 220px;
+  }
+  header .navbar .otherLink > a {
+    padding: 0 14px 0 8px;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  header .navbar .otherLink > a:last-child {
+    padding: 0 0 0 8px;
+    border-right: 0;
+  }
+  header .navbar .toolsComplex .toolsLink {
+    margin: 0;
+  }
+  header .navbar .toolsComplex .toolsLink > a.myCenterComplex {
+    margin: 0;
+    padding: 0 8px 0 20px;
+  }
+  header .navbar .toolsComplex .toolsLink > a {
+    margin: 0;
+    padding: 0 8px 0 20px;
+    font-size: 14px;
+  }
+  header .navbar .toolsComplex a.retail {
+    border-right: 0;
+    margin: 0;
+  }
+  header .navbar .toolsComplex a.myCenterComplex,
+  header .navbar .toolsComplex a.eCareComplex,
+  header .navbar .toolsComplex a.retail {
+    -moz-background-size: 16px auto;
+    background-size: 16px auto;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  #wrapper {
+    overflow: hidden;
+  }
+  header .topbar a {
+    padding: 0 20px;
+  }
+  header .memberbar a,
+  header .memberbar span,
+  header .memberbar .login {
+    font-size: 12px;
+  }
+  /*header .navbar .toolsComplex { top: 10px;}*/
+  header .navbar .toolsComplex a {
+    margin: 0;
+    font-size: 11px;
+    padding: 28px 0 0;
+  }
+  header .navbar .toolsComplex a.qa {
+    margin: 0 20px 0 5px;
+  }
+  section article h2.mainHead {
+    margin: 0 0 10px;
+  }
+  footer {
+    padding: 20px 20px;
+  }
+  footer .selectBox {
+    top: 0;
+  }
+  header .navbar .otherLink > a {
+    padding: 0 8px 0 4px;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  header .navbar .otherLink > a:last-child {
+    padding: 0 0 0 4px;
+    border-right: 0;
+  }
+  /*
+    header .navbar .main .redBg { left: 70px;}
+    header .navbar .otherLink { left: 140px;}
+    header .navbar .toolsComplex .toolsLink > a.myCenterComplex {
+        margin: 0 5px 0 0;
+        padding: 0 8px 0 22px;
+    }
+    header .navbar .toolsComplex .toolsLink > a {
+        margin: 0 5px 0 0;
+        padding: 0 8px 0 22px;
+        font-size: 15px;
+    }
+    */
+}
+
+@media only screen and (max-width: 767px) {
+  header .navbar .otherLink {
+    display: none;
+  }
+  header .topbar,
+  header .memberbar,
+  header .navbar .toolsComplex,
+  article.otherLinkBox .otherBox,
+  footer .monitor {
+    display: none;
+  }
+  footer .mobile {
+    display: block;
+  }
+  .backtop {
+    right: 5px;
+    bottom: 100px;
+  }
+  header .topAd .mainTitle {
+    font-size: 18px;
+  }
+  header .topAd .main .boxColumn {
+    padding: 10px 50px 10px 0;
+  }
+  header .topAd .mainTitle .boxComplex {
+    padding: 0 0 0 15px;
+    margin: 0 20px;
+  }
+  header .topAd .button {
+    padding: 2px 0;
+  }
+  header .topAd .button a {
+    font-size: 15px;
+    height: auto;
+    line-height: 24px;
+    padding: 5px 10px;
+    text-align: left;
+    width: 120px;
+  }
+  header .topAd .button a img {
+    top: 0;
+  }
+  header .topAd .monitor {
+    display: none;
+  }
+  header .topAd .mobile {
+    display: block;
+  }
+  header .navbar .redBg {
+    height: 42px;
+  }
+  header .navbar .main .redBg {
+    left: 55px;
+    height: 42px;
+  }
+  header .navbar {
+    height: 42px;
+  }
+  header .navbar .main {
+    text-align: right;
+  }
+  header .navbar .logo {
+    top: 5px;
+    left: 10px;
+    width: 80px;
+    height: 29px;
+    z-index: 1;
+  }
+  header .navbar .logo img {
+    max-width: 80px;
+  }
+  header .navbar .navMobile {
+    position: relative;
+    float: right;
+    display: block;
+    z-index: 1;
+  }
+  header .navbar .navMobile a.FETnetComplex {
+    background: url(../images/mobile/icon_fet.jpg) no-repeat;
+  }
+  header .navbar .navMobile a.retail {
+    background: url(../images/mobile/btn_retail.jpg) no-repeat;
+  }
+  header .navbar .navMobile a.menuComplex {
+    background: url(../images/mobile/btn_menu.jpg) no-repeat;
+  }
+  header .navbar .navMobile a.FETnetComplex,
+  header .navbar .navMobile a.retail,
+  header .navbar .navMobile a.menuComplex {
+    float: left;
+    width: 42px;
+    height: 42px;
+    font-size: 0;
+    -moz-background-size: 42px auto;
+    background-size: 42px auto;
+  }
+  header .navbar .navMobile a.msgComplex {
+    width: 53px;
+    margin: 0 4px 0 0;
+    -moz-background-size: 53px auto;
+    background-size: 53px auto;
+  }
+  header .navbar .menuMobile {
+    display: block;
+  }
+  header .menuMobile {
+    display: block;
+  }
+  header .memberbar .login a,
+  header .memberbar .logout a {
+    padding: 0 0 0 37px;
+  }
+  section article h2.mainHead,
+  aside.toolbar h2.mainHead span,
+  article.hotLinkBox h2.mainHead {
+    font-size: 16px;
+  }
+  footer .main {
+    padding: 0;
+  }
+  footer .partnersLogoList ul li img {
+    max-width: 68px;
+  }
+  footer .partnersLogoList {
+    padding: 10px 0 2px 0;
+  }
+  footer {
+    padding: 20px 20px 10px 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  footer {
+    padding: 20px 5px 10px;
+  }
+  footer .partnersLogoList ul li {
+    display: inline-block;
+    margin: 4px 1px;
+  }
+  footer .partnersLogoList ul li img {
+    max-width: 72px;
+  }
+}
+
+/**
+*
+* iPads
+*
+**/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  header {
+    zoom: .78;
+  }
+  header .navbar .redBg {
+    left: 52%;
+  }
+  /*header .navbar .main .redBg { left: 100px;}
+    header .navbar .otherLink { left: 200px;}*/
+  header .navbar .toolsComplex > a {
+    font-size: 9px;
+    padding: 30px 0 0;
+  }
+  header .navbar .toolsComplex a.msgComplex,
+  header .navbar .toolsComplex a:hover.msgComplex,
+  header .navbar .toolsComplex a.qaComplex,
+  header .navbar .toolsComplex a:hover.qaComplex {
+    -moz-background-size: 32px auto;
+    background-size: 32px auto;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  header {
+    zoom: .58;
+  }
+  header .navbar .toolsComplex .toolsLink > a {
+    font-size: 12px;
+  }
+  header .navbar .toolsComplex a {
+    font-size: 8px;
+    padding: 24px 0 0;
+  }
+  header .navbar .otherLink > a {
+    font-size: 12px;
+  }
+  header .topbar a {
+    font-size: 7.5px;
+  }
+  header .navbar .logo {
+    top: 10px;
+    width: 120px;
+  }
+  header .navbar .logo img {
+    max-width: 120px;
+  }
+}
+
+/**
+*
+* iPhones 
+*
+**/
+/**
+*
+* ratio: 1.5
+*
+**/
