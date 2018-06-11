@@ -2,7 +2,7 @@
  
  * @ client:  FET
  * @ project: 4.5G Landing Page
- * @ date:    Mon Jun 11 2018
+ * @ date:    Tue Jun 12 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -98,7 +98,7 @@ $( viewpageApp.el ).viewportChecker({
 	removeClassAfterAnimation:  false, 
 	offset:                    '0%',
 	invertBottomOffset:         false,
-	repeat:                     true, 
+	repeat:                     false, 
 	scrollHorizontal:           false,
 	callbackFunction: function( elem, action ){} 
 });
