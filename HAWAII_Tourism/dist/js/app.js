@@ -1,8 +1,8 @@
 /************************************************
  
- * @ client:  客戶
- * @ project: 專案
- * @ date:    Wed Aug 08 2018
+ * @ client:  HAWAII Tourism
+ * @ project: HAWAII Tourism website
+ * @ date:    Thu Aug 16 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -319,7 +319,7 @@ $body.imagesLoaded().then(function (instance, image) {
 
 // 尺寸
 function resizing() {
-    W = window.innerWidth;
+    W = window.innerWi;
     H = window.innerHeight;
 }
 window.onresize = function () {
@@ -350,7 +350,7 @@ $('.slidesFrame').each(function () {
         options = {
         prevArrow: $this.children('.slides_prev'),
         nextArrow: $this.children('.slides_next'),
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 650,
         centerMode: true,

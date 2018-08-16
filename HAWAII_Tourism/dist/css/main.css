@@ -2,7 +2,7 @@
  
  * @ client:  HAWAII Tourism
  * @ project: HAWAII Tourism website
- * @ date:    Wed Aug 08 2018
+ * @ date:    Thu Aug 16 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -11,7 +11,7 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 @import url(https://fonts.googleapis.com/css?family=Anton);
-.scaleFix-h25:before, .scaleFix-h50:before, .scaleFix-h37_5:before, .scaleFix-h56_25:before, .scaleFix-h75:before, .scaleFix-h100:before, .scaleFix-h150:before, .scaleFix-h200:before, .loading_container:before, .loading_visual:before, .radioBox:before, .radioBox:after, .checkBox:before, .checkBox:after, .icon-custom:before, .icon-custom:after, .btn-custom:before, .btn-link .btn_text:before, .btn-link .btn_text:after, .col_content:after, .slides_prev:before, .slides_next:before, .slides_prev:after, .slides_next:after, .hamburger .burger_piece:before, .hamburger .burger_piece:after, .menu_item_text:after, .iconMenu_list:after, .weather_text:after, .weather_temp:after {
+.scaleFix-h25:before, .scaleFix-h50:before, .scaleFix-h37_5:before, .scaleFix-h56_25:before, .scaleFix-h75:before, .scaleFix-h100:before, .scaleFix-h150:before, .scaleFix-h200:before, .loading_container:before, .loading_visual:before, .radioBox:before, .radioBox:after, .checkBox:before, .checkBox:after, .icon-custom:before, .icon-custom:after, .btn-custom:before, .btn-link .btn_text:before, .btn-link .btn_text:after, .col_content:after, .slides_prev:before, .slides_next:before, .slides_prev:after, .slides_next:after, .popup:before, .popup_container, .hamburger .burger_piece:before, .hamburger .burger_piece:after, .menu_item_text:after, .iconMenu_list:after, .weather_text:after, .weather_temp:after {
   content: "";
   display: inline-block;
   -webkit-box-sizing: border-box;
@@ -1193,13 +1193,14 @@ input, textarea, select, *[contenteditable="true"] {
   left: -100vw;
   width: 100%;
   height: 100%;
+  opacity: 0;
   overflow: hidden;
-  -webkit-transition: top 0s 1s, left 0s 1s, opacity 0.45s 0.55s ease-in-out, -webkit-transform 0.45s 0.55s ease-in-out;
-  transition: top 0s 1s, left 0s 1s, opacity 0.45s 0.55s ease-in-out, -webkit-transform 0.45s 0.55s ease-in-out;
-  -o-transition: top 0s 1s, left 0s 1s, opacity 0.45s 0.55s ease-in-out, -o-transform 0.45s 0.55s ease-in-out;
-  -moz-transition: top 0s 1s, left 0s 1s, transform 0.45s 0.55s ease-in-out, opacity 0.45s 0.55s ease-in-out, -moz-transform 0.45s 0.55s ease-in-out;
-  transition: top 0s 1s, left 0s 1s, transform 0.45s 0.55s ease-in-out, opacity 0.45s 0.55s ease-in-out;
-  transition: top 0s 1s, left 0s 1s, transform 0.45s 0.55s ease-in-out, opacity 0.45s 0.55s ease-in-out, -webkit-transform 0.45s 0.55s ease-in-out, -moz-transform 0.45s 0.55s ease-in-out, -o-transform 0.45s 0.55s ease-in-out;
+  -webkit-transition: top 0s 1s, left 0s 1s, opacity 0.45s ease-in-out, -webkit-transform 0.45s ease-in-out;
+  transition: top 0s 1s, left 0s 1s, opacity 0.45s ease-in-out, -webkit-transform 0.45s ease-in-out;
+  -o-transition: top 0s 1s, left 0s 1s, opacity 0.45s ease-in-out, -o-transform 0.45s ease-in-out;
+  -moz-transition: top 0s 1s, left 0s 1s, transform 0.45s ease-in-out, opacity 0.45s ease-in-out, -moz-transform 0.45s ease-in-out;
+  transition: top 0s 1s, left 0s 1s, transform 0.45s ease-in-out, opacity 0.45s ease-in-out;
+  transition: top 0s 1s, left 0s 1s, transform 0.45s ease-in-out, opacity 0.45s ease-in-out, -webkit-transform 0.45s ease-in-out, -moz-transform 0.45s ease-in-out, -o-transform 0.45s ease-in-out;
 }
 
 .cover_active, .popup_active {
@@ -1218,12 +1219,25 @@ input, textarea, select, *[contenteditable="true"] {
   transition: top 0s, left 0s, transform 0.45s ease-in-out, opacity 0.45s ease-in-out, -webkit-transform 0.45s ease-in-out, -moz-transform 0.45s ease-in-out, -o-transform 0.45s ease-in-out;
 }
 
-.cover_background, .popup_background {
-  position: absolute;
+.cover_active:checked + .cover .popup_background, .cover.on-visible .popup_background, .popup_active:checked + .cover .popup_background, .popup.on-visible .popup_background, .cover_active:checked + .popup .popup_background, .popup_active:checked + .popup .popup_background {
   top: 0;
   left: 0;
+  -webkit-transition-delay: 0s;
+     -moz-transition-delay: 0s;
+       -o-transition-delay: 0s;
+          transition-delay: 0s;
+}
+
+.cover_background, .popup_background {
+  position: fixed;
+  top: -100vh;
+  left: -100vw;
   width: 100%;
   height: 100%;
+  -webkit-transition: top 0s 0.45s, left 0s 0.45s;
+  -o-transition: top 0s 0.45s, left 0s 0.45s;
+  -moz-transition: top 0s 0.45s, left 0s 0.45s;
+  transition: top 0s 0.45s, left 0s 0.45s;
 }
 
 .cover .icon-X, .popup .icon-X {
@@ -2152,123 +2166,99 @@ input, textarea, select, *[contenteditable="true"] {
   }
 }
 
-/*
-.header, .footer{ 
-	z-index: 170; 
-	transition: 
-        transform .45s ease-in-out,
-    	background .45s ease-in-out,
-    	box-shadow .45s ease-in-out;
-	&_container{}
-	&_content{}
+.form_list {
+  min-width: 100%;
+  padding: 1em 0;
+  overflow: hidden;
 }
-.form{
-	&_content{
-		box-shadow: 0 0 0 2px rgba(white, 0.15) inset;	
-		overflow: hidden; 
-	}
-	&_group{
-		position: relative;
-		padding: 1rem;
-	}
-	&_item{
-		$padding-topbottom: .5rem;
-		padding: $padding-topbottom 0rem;
-		overflow: hidden;
-		&-select{} 
-		&-check{} 
-		&-radio{}
-		&-text{}
-		&-input{}
-		.captcha_pic{ display: block; }
-		.radioBox, .checkBox{
-			position: relative;
-			margin-right: .25rem;
-			width: 1rem;
-			height: 1rem;
-			background: rgba(white,.15);
-			box-shadow: 0 0 1px black inset;
-			border-radius: 3px;
-			display: inline-block;
-			vertical-align: middle;
-			&-active{ display: none; }
-			&+.form_item_text{ 
-				max-width: calc( 100% - 1rem );
-				float: none;
-				display: inline-block;
-				vertical-align: middle;
-				font-size: $font-size;
-			}
-			&, &:before, &:after{
-				transition: 
-					background .45s,
-					border .45s,
-					opacity .45s,
-					transform .45s;
-			}
-		}
-		.radioBox{
-			&:before{
-				background: black;
-				opacity: 0;
-				transform: scale(0);
-			}
-			&-active:checked{
-				&+.radioBox, &+label .radioBox{ 
-					&:before{ opacity: 1; transform: scale(1); } 
-				}  
-			}
-		}
-		.checkBox{			
-			&:before{
-				border-width: 0 0 5px 5px; 
-				opacity: 0; 
-			}
-			&-active:checked{
-				&+.checkBox, &+label .checkBox{
-					&:before{ opacity: 1; }
-				}
-			}
-		}
-		&_name{
-			// min-width: 4rem + 1rem;
-			padding: 0 .5rem;
-			float: left;
-		}
-		&_frame{
-			position: relative;
-			width: auto;
-			padding: 0 .5rem;
-			overflow: hidden;
-			.col-box{ overflow: hidden; }
-			.error-msg{
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				color: $color-red;
-				font-size: .75rem;
-			}
-			input{
-				width: 100%;
-				background: rgba(white,.85);
-				padding: 0 .75rem;
-				line-height: $padding-topbottom*2 + 1rem;
-			}
-		}
-		.error{
-			&Msg{ 
-				visibility: hidden;
-				white-space: nowrap; 
-			}
-			.errorMsg{ visibility: visible; }
-		}
-		.default{
-			input{ color: $color-grey; }
-		}
-	}
+
+.form_item {
+  margin: 1em 0;
 }
-*/
+
+.form_item_title {
+  position: relative;
+  line-height: 2em;
+  float: left;
+}
+
+.form_item_title img {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+}
+
+.form_item_frame {
+  padding: 0 .5em;
+  overflow: hidden;
+}
+
+.form input {
+  width: 100%;
+  height: 2em;
+  padding: 0 .5em;
+  line-height: 2em;
+  -webkit-box-shadow: 0 0 0 1px grey inset;
+     -moz-box-shadow: 0 0 0 1px grey inset;
+          box-shadow: 0 0 0 1px grey inset;
+}
+
+.popup {
+  z-index: 1000;
+  font-size: 0;
+  text-align: center;
+}
+
+.popup_background {
+  background: rgba(1, 22, 52, 0.85);
+}
+
+.popup:before {
+  width: 0;
+  height: 100%;
+}
+
+.popup:before, .popup_container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.popup_container {
+  position: relative;
+  background: white;
+  padding: 2.5em 3em;
+  -webkit-border-radius: 15px;
+     -moz-border-radius: 15px;
+          border-radius: 15px;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.popup_container .btn_text {
+  padding: .3em 1.75em;
+}
+
+.popup_title, .popup_sub {
+  position: relative;
+  margin-bottom: 1em;
+  color: #011634;
+}
+
+.popup .icon-X {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3em;
+  height: 3em;
+}
+
+.popup .icon-X:before, .popup .icon-X:after {
+  width: 60%;
+  height: 3px;
+  background: #011634;
+}
+
 .header {
   position: fixed;
   width: 100%;

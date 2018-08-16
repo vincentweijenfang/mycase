@@ -155,10 +155,10 @@
 							<p class="checkBox_text font-weight-B">我同意活動聲明</p> 
 						</label></div>
 						<div class="col_box_btnGroup rule_btnGroup">
-							<a class="btn btn-custom btn-blue" href="">
+							<label class="btn btn-custom btn-blue" for="form-popup_active">
 								<span class="btn_text">登入並參加</span>
 								<!-- <span class="btn_icon"><img src="./img/icon/icon_link.png" alt=""></span> -->
-							</a>
+							</label>
 						</div>
 					</div>
 				</div></div>
@@ -184,6 +184,49 @@
             <div class="loading_visual">
                 <canvas class="loading_percent"></canvas>
             </div>
+        </div>
+    </div>
+</div>
+
+	<input type="checkbox" id="form-popup_active" class="popup_active" >
+<div class="form-popup popup">
+    <label for="form-popup_active">
+        <div class="popup_background"></div>
+    </label>
+    <div class="popup_container">
+        <label for="form-popup_active">
+            <div class="btn icon icon-custom icon-X"></div>
+        </label>
+        <div class="popup_content">
+            <h4 class="popup_title font-weight-B">填寫完整活動資訊</h4>
+            <p class="popup_sub">請妥善填寫完整的個人資訊，以方便活動方與您的密切聯繫喔</p>
+            <form id="form" class="form" action="">
+                <div class="form_list row">
+                    <div class="form_item col col-12 col-md-6">
+                        <p class="form_item_title font-color-yellow"><span class="words"><img class="" src="./img/icon/icon_name.svg" alt=""></span></p>
+                        <div class="form_item_frame">
+                            <input class="words" name="name" type="text" />
+                        </div>
+                    </div>
+                    <div class="form_item col col-12 col-md-6">
+                        <p class="form_item_title font-color-yellow"><span class="words"><img class="" src="./img/icon/icon_phone.svg" alt=""></span></p>
+                        <div class="form_item_frame">
+                            <input class="words" name="phone" type="text" maxlength="10" />
+                        </div>
+                    </div>
+                    <div class="form_item col-12">
+                        <p class="form_item_title font-color-yellow"><span class="words"><img class="" src="./img/icon/icon_mail.svg" alt=""></span></p>
+                        <div class="form_item_frame">
+                            <input class="words" name="email" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="btnGroup">
+                    <button class="btn btn-custom btn-blue" type="submit">
+                        <span class="words btn_text">完成與儲存</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
