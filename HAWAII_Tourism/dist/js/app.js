@@ -2,7 +2,7 @@
  
  * @ client:  HAWAII Tourism
  * @ project: HAWAII Tourism website
- * @ date:    Thu Aug 16 2018
+ * @ date:    Fri Aug 17 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -339,9 +339,9 @@ window.onscroll = function () {
     }
 };
 
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
+// if( 'scrollRestoration' in history ){
+// 	history.scrollRestoration = 'manual';
+// }
 
 // Slick
 $('.slidesFrame').each(function () {

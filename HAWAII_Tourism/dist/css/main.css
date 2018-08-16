@@ -2,7 +2,7 @@
  
  * @ client:  HAWAII Tourism
  * @ project: HAWAII Tourism website
- * @ date:    Thu Aug 16 2018
+ * @ date:    Fri Aug 17 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -2904,12 +2904,14 @@ input, textarea, select, *[contenteditable="true"] {
           transform: translateX(-50%) translateY(-50%);
 }
 
-.index_pic {
-  position: relative;
+.index_pic, .index_videoPlayer {
+  position: absolute;
   left: 50%;
   top: 50%;
   min-width: 100%;
   min-height: 100%;
+  min-width: 177.78vh;
+  min-height: 56.25vw;
   -webkit-transform: translateX(-50%) translateY(-50%);
      -moz-transform: translateX(-50%) translateY(-50%);
       -ms-transform: translateX(-50%) translateY(-50%);
