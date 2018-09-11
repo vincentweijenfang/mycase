@@ -2,7 +2,7 @@
  
  * @ client:  新光銀行
  * @ project: 光陰彈豬所
- * @ date:    Sun Sep 09 2018
+ * @ date:    Wed Sep 12 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -368,44 +368,6 @@ $('.slidesBox').each(function () {
 	}
 });
 
-/* slick */
-/*
-$('.slides').each(function () {
-	var $this = $(this),
-	    $slides = $this.children('.slides_list'),
-	    slidesName = $slides.data('slick'),
-	    slidesNav = slidesName ? '.slides_nav[data-slick=' + slidesName + ']' : false,
-	    options = {
-		prevArrow: $this.children('.slides_prev'),
-		nextArrow: $this.children('.slides_next'),
-		dots: false,
-		infinite: true,
-		speed: 650,
-		centerMode: true,
-		centerPadding: '0%',
-		slidesToShow: 1,
-		asNavFor: slidesNav
-	};
-	$slides.slick(options);
-	if (slidesName) {
-		var navOptions = {
-			revArrow: false,
-			nextArrow: false,
-			slidesToShow: 1,
-			slidesToScroll: 1,
-			asNavFor: '.slides_list[data-slick=' + slidesName + ']',
-			dots: false,
-			infinite: false,
-			speed: 650,
-			fade: true,
-			centerMode: true,
-			centerPadding: '0%',
-			focusOnSelect: true
-		};
-		$(slidesNav).slick(navOptions);
-	}
-});*/
-
 ///////////////////////////////////////////////////////////////
 
 
@@ -471,3 +433,54 @@ $(viewpageApp.el).viewportChecker({
 });
 
 ///////////////////////////////////////////////////////////////
+
+$('.btn-event_getGift').click(function () {
+	var nowStatus = 'login';
+	switch (nowStatus) {
+		case 'notLogin':
+			openPopup('login');
+			break;
+		case 'login':
+			openPopup('unwelcome');
+			openPopup('welcome');
+			break;
+		default:
+			openPopup('login');
+			break;
+	}
+});
+
+$('.btn-event_login').click(function () {
+	var nowStatus = 'notlogin';
+	switch (nowStatus) {
+		case 'notLogin':
+			openPopup('login');
+			break;
+		case 'login':
+			alert('已登入');
+			break;
+		default:
+			openPopup('login');
+			break;
+	}
+});
+
+$('.btn-event_shot').click(function () {
+	var shotball = $(this).data('ball');
+	switch (Number(shotball)) {
+		case 3:
+			openPopup('winning');
+			break;
+		case 65:
+			openPopup('winning');
+			break;
+		default:
+			openPopup('login');
+			break;
+	}
+});
+
+$('.btn-event_info').click(function () {
+	$('.btn-event_tab[data-info="' + $(this).data('info') + '"]').trigger('click');
+	openPopup('personalInfo');
+});

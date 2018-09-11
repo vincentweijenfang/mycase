@@ -2,7 +2,7 @@
  
  * @ client:  新光銀行
  * @ project: 光陰彈豬所
- * @ date:    Sun Sep 09 2018
+ * @ date:    Wed Sep 12 2018
  * @ author:  Vincent Fang
  * @ version: v1.0.0
  
@@ -3302,7 +3302,7 @@ body {
   font-size: 1rem;
 }
 
-.menu-main .menu_list {
+.menu-main > .menu_list {
   text-align: center;
 }
 
@@ -3391,6 +3391,10 @@ body {
           transition-delay: 0.25s;
 }
 
+.menu-select > .menu_list {
+  font-size: .75rem;
+}
+
 @media (min-width: 1200px) {
   .menu-main {
     position: absolute;
@@ -3420,11 +3424,51 @@ body {
     color: white;
     font-size: 1rem;
   }
+  .menu-main .menu_item-select:hover .menu-select {
+    display: block;
+  }
   .menu-main .menu_item.btn-hover:hover, .menu-main .menu_item.btn-hover.on-active {
     background: white;
   }
   .menu-main .menu_item.btn-hover:hover .menu_item_text, .menu-main .menu_item.btn-hover.on-active .menu_item_text {
     color: #e50012;
+  }
+  .menu-select {
+    display: none;
+  }
+  .menu-select > .menu_list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+  .menu-select .menu_item {
+    position: relative;
+    top: -1px;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #e50012;
+    display: block;
+    font-size: 1rem;
+  }
+  .menu-select .menu_item .menu_item_text {
+    color: #e50012;
+    line-height: 1.25em;
+    height: auto;
+    padding: .75rem 0;
+  }
+  .menu-select .menu_item.btn {
+    padding: 0 1rem;
+  }
+  .menu-select .menu_item.btn-hover:hover, .menu-select .menu_item.btn-hover.on-active {
+    background: #e50012;
+  }
+  .menu-select .menu_item.btn-hover:hover .menu_item_text, .menu-select .menu_item.btn-hover.on-active .menu_item_text {
+    color: white;
+  }
+  .menu_item-select:hover .menu-select {
+    display: block;
   }
   .hamburger {
     display: none;
@@ -3688,57 +3732,69 @@ body {
 }
 
 .pinball_pig-angry {
-  top: 0;
-  left: 0;
+  top: 64%;
+  left: 37%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-cry {
-  top: 0;
-  left: 0;
+  -webkit-animation: loading 2.1s 1s infinite;
+     -moz-animation: loading 2.1s 1s infinite;
+       -o-animation: loading 2.1s 1s infinite;
+          animation: loading 2.1s 1s infinite;
+  top: 28.5%;
+  left: 24.5%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-pain {
-  top: 0;
-  left: 0;
+  top: 53.5%;
+  left: 78%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-pink {
-  top: 0;
-  left: 0;
+  -webkit-animation: loading 2.25s 1.5s infinite reverse;
+     -moz-animation: loading 2.25s 1.5s infinite reverse;
+       -o-animation: loading 2.25s 1.5s infinite reverse;
+          animation: loading 2.25s 1.5s infinite reverse;
+  top: 68%;
+  left: 11%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-sleep {
-  top: 0;
-  left: 0;
+  top: 51%;
+  left: 47%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-smile {
-  top: 0;
-  left: 0;
+  top: 57%;
+  left: 51%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-startle {
-  top: 0;
-  left: 0;
+  top: 61%;
+  left: 78%;
   width: 12.5%;
   height: 7.97409%;
 }
 
 .pinball_pig-yellow {
-  top: 0;
-  left: 0;
+  -webkit-animation: loading 2s infinite reverse;
+     -moz-animation: loading 2s infinite reverse;
+       -o-animation: loading 2s infinite reverse;
+          animation: loading 2s infinite reverse;
+  top: 8%;
+  left: 50%;
   width: 12.5%;
   height: 7.97409%;
 }
